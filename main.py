@@ -1,5 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel , conint, constr
 from typing import Optional
+
 
 # class User(BaseModel):
 #     id: int
@@ -20,3 +21,13 @@ user2 = User(id=2, name="Seji", email="seji@gmail.com")
 
 print(user1)
 print(user2)
+
+class another_user(BaseModel):
+    id: conint(gt=0)
+    name: constr(min_length=2, max_length=50)
+
+valid_user = another_user(id=1, name="Qamil")  
+print(valid_user)
+
+valid_user1 = another_user(id=0, name="Qal")  
+print(valid_user1) 
